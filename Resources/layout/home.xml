@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+	android:background="@color/brl"
+    android:padding="20dp"
+    android:id="@+id/nav">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:layout_alignParentLeft="true"
+            android:textSize="20dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/textView1"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:background="@drawable/info"
+            android:id="@+id/about"
+            />
+    </RelativeLayout>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--End Tab-->
+	<RelativeLayout
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="@drawable/rounded2"
+	android:layout_below="@+id/nav"
+	android:layout_marginTop="10dp"
+	android:layout_marginHorizontal="10dp"
+	android:padding="5dp">
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="@string/end"
+			android:textSize="10dp"
+			android:textAlignment="center"
+			android:textColor="@color/semiwhite"
+			android:id="@+id/end"/>
+	</RelativeLayout>
+    
+</RelativeLayout>

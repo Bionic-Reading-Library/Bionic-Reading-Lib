@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Bionic Reading Library</string>
+    <string name="action_settings">Settings</string>
+	<string name="start">Start</string>
+	<string name="exit">Exit</string>
+	<string name="nh">Need Help?</string>
+	<string name="wel">Welcome to\nBionic Reading Library</string>
+	<string name="desc">Enhance your reading ability with advanced technology for an immersive and efficient reading experience.</string>
+	<string name="end">Oops, it looks like you\'ve reached the end. More modules are coming soon.</string>
+	<string name="checkrel">Check For Updates</string>
+	<string name="git">Project</string>
+	<string name="err">Report an Issue</string>
+	<string name="about">About App</string>
+	<string name="ver">Release Version:</string>
+	<string name="cn">Codename:</string>
+	<string name="undef">Undefined</string>
+	<string name="ur">Beta : Coral</string>
+</resources>
