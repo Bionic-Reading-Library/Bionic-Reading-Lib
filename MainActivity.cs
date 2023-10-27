@@ -36,8 +36,7 @@ namespace Bionic_Reading_Lib
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            try
-            {
+
                 base.OnCreate(savedInstanceState);
                 Xamarin.Essentials.Platform.Init(this, savedInstanceState);
                 // Set our view from the "main" layout resource
@@ -77,11 +76,7 @@ namespace Bionic_Reading_Lib
                 };
 
                 CheckUpdates_OnLoad(this, EventArgs.Empty);
-            }catch(Exception ex)
-            {
-                Intent intent = new Intent(this, typeof(Error));
-                StartActivity(intent);
-            }
+
 
 
 

@@ -47,7 +47,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded"
             android:layout_above="@id/appCompatButton2"
-            android:text="@string/home"
+            android:text="@string/homee"
             android:id="@+id/appCompatButton1" />
     <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"

@@ -17,21 +17,21 @@ namespace Bionic_Reading_Lib
     [Activity(Label = "home")]
     public class home : Activity
     {
-        private const string db = "https://api.github.com/repos/Bionic-Reading-Library/PDFs-BRL/contents/";
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            try
-            {
+            TextView title;
+            TextView bdesc;
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.home);
                 var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
 
                 // Create your application here
-                TextView header = FindViewById<TextView>(Resource.Id.textView1);
+                title = FindViewById<TextView>(Resource.Id.Title);
+                bdesc = FindViewById<TextView>(Resource.Id.bdesc);
                 TextView end = FindViewById<TextView>(Resource.Id.end);
-                header.Typeface = urbanistfont;
-                header.SetTypeface(header.Typeface, TypefaceStyle.Bold);
-                end.Typeface = urbanistfont;
+                title.Typeface = bdesc.Typeface = end.Typeface = urbanistfont;
+                title.SetTypeface(title.Typeface, TypefaceStyle.Bold);
 
                 AppCompatButton about = FindViewById<AppCompatButton>(Resource.Id.about);
                 about.Click += (sender, args) =>
@@ -39,11 +39,6 @@ namespace Bionic_Reading_Lib
                     Intent intent = new Intent(this, typeof(about));
                     StartActivity(intent);
                 };
-            }catch (Exception ex)
-            {
-                Intent intent = new Intent(this, typeof(Error));
-                StartActivity(intent);
-            }
 
         }
     }

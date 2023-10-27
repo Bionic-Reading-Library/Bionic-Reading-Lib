@@ -4724,7 +4724,7 @@ namespace Bionic_Reading_Lib
 			public const int hide_bottom_view_on_scroll_behavior = 2131558450;
 			
 			// aapt resource value: 0x7F0D0033
-			public const int home = 2131558451;
+			public const int homee = 2131558451;
 			
 			// aapt resource value: 0x7F0D0034
 			public const int mtrl_chip_close_icon_content_description = 2131558452;

@@ -20,7 +20,7 @@
 	<string name="pcd">Press here here to download</string>
 	<string name="errm">An error has occurred. Please report the issue \nimmediately or choose to ignore it and continue.</string>
 	<string name="easteregg">You have delved deep into the unknown to reach this area. \nIt\'s advisable to turn back\, as you wouldn\'t want to get lost here.</string>
-	<string name="home">Go Back Home</string>
+	<string name="homee">Go Back Home</string>
 	<string name="nc">No Modules Available</string>
 	<string name="descn">Could it be that your internet is currently disabled?</string>
 </resources>
