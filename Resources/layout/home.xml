@@ -12,15 +12,11 @@
 	android:background="@color/brl"
     android:padding="20dp"
     android:id="@+id/nav">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            android:textColor="@color/white"
-            android:layout_alignParentLeft="true"
-            android:textSize="20dp"
-            android:layout_centerInParent="true"
-            android:id="@+id/textView1"/>
+		<ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+			android:src="@drawable/logo3"
+			android:layout_alignParentStart="true"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="30dp"
@@ -32,31 +28,66 @@
             />
     </RelativeLayout>
 	
-	
-	
+
+    <!--Scrollable Content-->
+	<ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_below="@+id/nav">
+
+	<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+			<RelativeLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@drawable/rounded2"
+			android:id="@+id/Container"
+			android:padding="10dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginHorizontal="10dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/Title"
+					android:textColor="@color/white"
+					android:text="@string/nc"/>
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:id="@+id/bdesc"
+					android:textColor="@color/white"
+					android:layout_below="@+id/Title"
+					android:text="@string/descn"
+					android:textSize="10dp"/>
+
+			</RelativeLayout>
 	
 	
 	
 	
 	
 	<!--End Tab-->
-	<RelativeLayout
-	android:layout_width="match_parent"
-	android:layout_height="wrap_content"
-	android:background="@drawable/rounded2"
-	android:layout_below="@+id/nav"
-	android:layout_marginTop="10dp"
-	android:layout_marginHorizontal="10dp"
-	android:padding="5dp">
-
-		<TextView
+			<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:text="@string/end"
-			android:textSize="10dp"
-			android:textAlignment="center"
-			android:textColor="@color/semiwhite"
-			android:id="@+id/end"/>
-	</RelativeLayout>
+			android:background="@drawable/rounded2"
+			android:layout_below="@+id/Container"
+			android:layout_marginTop="10dp"
+			android:layout_marginHorizontal="10dp"
+			android:padding="5dp">
+
+				<TextView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:text="@string/end"
+					android:textSize="10dp"
+					android:textAlignment="center"
+					android:textColor="@color/semiwhite"
+					android:id="@+id/end"/>
+			</RelativeLayout>
+		</RelativeLayout>
+	</ScrollView>
     
 </RelativeLayout>

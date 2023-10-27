@@ -17,11 +17,11 @@
             android:layout_height="match_parent"
             android:src="@drawable/bgg"
             android:scaleType="centerCrop"
-            android:rotation="21"
             android:layout_marginLeft="-91.92dp"
             android:layout_marginRight="-1000.92dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="-210.63dp"
+            android:layout_marginBottom="-210.63dp"
             android:foregroundGravity="center"
             android:layout_centerInParent="true"
             android:layout_centerHorizontal="true"            />
@@ -52,10 +52,51 @@
         android:layout_height="350dp"
         android:minWidth="25px"
         android:minHeight="25px"
+        android:background="@drawable/arround"
         android:id="@+id/relativeLayout2"
+        android:layout_marginTop="-210.63dp"
         android:layout_marginRight="0.0dp"
         android:layout_marginBottom="0.0dp"
         android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:padding="20dp"
+            android:id="@+id/dlbtn"
+            android:layout_marginHorizontal="45dp"
+            android:background="@drawable/notif">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/update"
+                    android:text="@string/udate"
+                    android:textSize="13dp"
+                    android:textColor="@color/white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/update"
+                android:id="@+id/dl"
+                android:textSize="8dp"
+                android:text="@string/pcd"
+                android:textColor="@color/white"
+                android:layout_centerVertical="false" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/verp"
+                android:layout_marginEnd="5dp"
+                android:textAlignment="center"
+                android:layout_alignParentEnd="true"
+                android:text="@string/uver"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true" />
+            </RelativeLayout>
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
