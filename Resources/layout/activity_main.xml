@@ -102,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="45dp"
             android:layout_marginBottom="10dp"
+            android:textAllCaps="False"
             android:background="@drawable/rounded"
             android:layout_above="@id/appCompatButton2"
             android:text="@string/start"
@@ -109,6 +110,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAllCaps="False"
             android:layout_marginHorizontal="45dp"
             android:background="@drawable/rounded"
             android:layout_marginBottom="10dp"

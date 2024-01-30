@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,87 +8,174 @@
     android:background="@color/dark">
 
     <RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-	android:background="@color/brl"
-    android:padding="20dp"
-    android:id="@+id/nav">
-		<ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-			android:src="@drawable/logo3"
-			android:layout_alignParentStart="true"/>
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brl"
+        android:padding="20dp"
+        android:id="@+id/nav">
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:gravity="center"
-            android:background="@drawable/info"
+            android:background="@drawable/menu"
             android:id="@+id/about"
             />
-    </RelativeLayout>
-	
 
-        <!--Scrollable Content-->
-	<ScrollView
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/logo3"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/about"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-		android:layout_below="@+id/nav">
+        android:layout_below="@+id/nav">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundb"
+            android:id="@+id/Container"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp">
 
-	<RelativeLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Title"
+                android:textColor="@color/white"
+                android:text="@string/lvle"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bdesc"
+                android:textColor="@color/white"
+                android:layout_below="@+id/Title"
+                android:text="@string/easy"
+                android:textSize="10dp"
+                android:layout_marginTop="5dp" />
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/liste"
+                android:layout_below="@+id/bdesc"
+                android:visibility="gone"
+                android:background="@drawable/rounded2"
+                android:layout_marginTop="10dp"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundo"
+            android:id="@+id/Container2"
+            android:layout_below="@+id/Container"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Title2"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:text="@string/lvla"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bdesc2"
+                android:textColor="@color/white"
+                android:layout_below="@+id/Title2"
+                android:text="@string/average"
+                android:textSize="10dp"
+                android:layout_marginTop="5dp"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lista"
+                android:layout_below="@+id/bdesc2"
+                android:visibility="gone"
+                android:background="@drawable/rounded2"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundr"
+            android:id="@+id/Container3"
+            android:layout_below="@+id/Container2"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Title3"
+                android:textSize="15dp"
+                android:textColor="@color/white"
+                android:text="@string/lvlh"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bdesc3"
+                android:textColor="@color/white"
+                android:layout_below="@+id/Title3"
+                android:text="@string/hard"
+                android:textSize="10dp"
+                android:layout_marginTop="5dp"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/listh"
+                android:layout_below="@+id/bdesc3"
+                android:visibility="gone"
+                android:background="@drawable/rounded2"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Container3"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:id="@+id/COntainer4"
+            android:background="@drawable/rounded"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tip: Press each level to show the genre"
+                android:textAlignment="center"
+                android:textSize="10dp"
+                android:textColor="@color/pgsdark"
+                android:id="@+id/not"
+                />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <include
+        android:id="@+id/drawer"
+        layout="@layout/drawer"
+        android:layout_below="@+id/nav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-			<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@drawable/rounded2"
-			android:id="@+id/Container"
-			android:padding="10dp"
-			android:layout_marginTop="10dp"
-			android:layout_marginHorizontal="10dp">
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="invisible" />
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/Title"
-					android:textColor="@color/white"
-					android:text="@string/nc"/>
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:id="@+id/bdesc"
-					android:textColor="@color/white"
-					android:layout_below="@+id/Title"
-					android:text="@string/descn"
-					android:textSize="10dp"/>
-
-			</RelativeLayout>
-	
-	
-	
-	
-	
-	<!--End Tab-->
-			<RelativeLayout
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@drawable/rounded2"
-			android:layout_below="@+id/Container"
-			android:layout_marginTop="10dp"
-			android:layout_marginHorizontal="10dp"
-			android:padding="5dp">
-
-				<TextView
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:text="@string/end"
-					android:textSize="10dp"
-					android:textAlignment="center"
-					android:textColor="@color/semiwhite"
-					android:id="@+id/end"/>
-			</RelativeLayout>
-		</RelativeLayout>
-	</ScrollView>
-    
 </RelativeLayout>

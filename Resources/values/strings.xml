@@ -14,7 +14,7 @@
 	<string name="ver">Release Version:</string>
 	<string name="cn">Codename:</string>
 	<string name="undef">Undefined</string>
-	<string name="ur">Beta : Cream</string>
+	<string name="ur">Undefined</string>
 	<string name="udate">No Updates Available</string>
 	<string name="uver">0.00</string>
 	<string name="pcd">Press here here to download</string>
@@ -23,4 +23,11 @@
 	<string name="homee">Go Back Home</string>
 	<string name="nc">No Modules Available</string>
 	<string name="descn">Could it be that your internet is currently disabled?</string>
+	<string name="lvle">Level 1\: Easy</string>
+	<string name="lvla">Level 2\: Average</string>
+	<string name="lvlh">Level 3\: Hard</string>
+	<string name="easy">You\'re strolling on a gentle path\, the sun warming your face\, enjoying the scenery as you go. Sentences are like stepping stones\, vocabulary familiar like wildflowers along the way. The story unfolds smoothly\, no treacherous cliffs or hidden crevasses to worry about.</string>
+	<string name="average">The terrain picks up. Your pace quickens as you navigate hills and valleys. Sentences become longer\, like bridges spanning gaps\, vocabulary introduces some less common plants and rocks. You may need to pay closer attention\, but the view continues to be rewarding.</string>
+	<string name="hard">You\'re on a mountain trail\, the air is thin\, and the path is steep. Sentences are like switchbacks\, vocabulary is like boulders and fallen trees. You\'ll need to slow down and watch your step\, but the view from the top will be worth it.</string>
+	<string name="quiz2">Enter your answer</string>
 </resources>

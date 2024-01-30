@@ -21,6 +21,7 @@ using Exception = System.Exception;
 using AndroidX.Core.App;
 using AndroidX.Core.Content;
 using Android;
+using Xamarin.Essentials;
 
 namespace Bionic_Reading_Lib
 {
@@ -28,50 +29,68 @@ namespace Bionic_Reading_Lib
     public class about : Activity
     {
         private const string ReleasesUrl = "https://api.github.com/repos/Bionic-Reading-Library/BRL-Release/releases/latest";
-        private const int RequestCodeStoragePermission = 100;
+        private string versioncode = $"{AppInfo.VersionString}";
+        private string CodeName = "Beta: CreamSnow";
+        private string Failup = "Network Returned 404 - Error Checking for Updates.";
+        private string downloadUrl = "";
+        private Typeface urbanistfont;
+        private TextView header;
+        private TextView app;
+        private TextView desc;
+        private TextView rver;
+        private TextView ver;
+        private TextView cn;
+        private TextView cnr;
+        private AppCompatButton back;
+        private AppCompatButton update;
+        private AppCompatButton project;
+        private AppCompatButton issue;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.about);
-                var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
+                urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
 
 
                 // Create your application here
-                TextView header = FindViewById<TextView>(Resource.Id.textView1);
-                TextView app = FindViewById<TextView>(Resource.Id.textView2);
-                TextView desc = FindViewById<TextView>(Resource.Id.textView3);
-                TextView rver = FindViewById<TextView>(Resource.Id.textView4);
-                TextView ver = FindViewById<TextView>(Resource.Id.textView5);
-                TextView cn = FindViewById<TextView>(Resource.Id.textView6);
-                TextView cnr = FindViewById<TextView>(Resource.Id.textView7);
+                header = FindViewById<TextView>(Resource.Id.textView1);
+                app = FindViewById<TextView>(Resource.Id.textView2);
+                desc = FindViewById<TextView>(Resource.Id.textView3);
+                rver = FindViewById<TextView>(Resource.Id.textView4);
+                ver = FindViewById<TextView>(Resource.Id.textView5);
+                cn = FindViewById<TextView>(Resource.Id.textView6);
+                cnr = FindViewById<TextView>(Resource.Id.textView7);
 
                 //Buttons
-                AppCompatButton back = FindViewById<AppCompatButton>(Resource.Id.btn);
-                AppCompatButton update = FindViewById<AppCompatButton>(Resource.Id.appCompatButton1);
-                AppCompatButton project = FindViewById<AppCompatButton>(Resource.Id.appCompatButton2);
-                AppCompatButton issue = FindViewById<AppCompatButton>(Resource.Id.appCompatButton4);
+                back = FindViewById<AppCompatButton>(Resource.Id.btn);
+                update = FindViewById<AppCompatButton>(Resource.Id.appCompatButton1);
+                project = FindViewById<AppCompatButton>(Resource.Id.appCompatButton2);
+                issue = FindViewById<AppCompatButton>(Resource.Id.appCompatButton4);
 
                 //Setting up Fonts
                 header.Typeface = app.Typeface = desc.Typeface = rver.Typeface = ver.Typeface = cn.Typeface = cnr.Typeface = update.Typeface = project.Typeface =
                     issue.Typeface = urbanistfont;
 
                 //Version Control info
-                string versionName = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
-                ver.Text = versionName;
+                ver.Text = versioncode;
+                cnr.Text = CodeName;
 
                 // Functions
                 back.Click += (sender, args) =>
                 {
                     Intent intent = new Intent(this, typeof(home));
                     StartActivity(intent);
+                    Finish();
                 };
                 project.Click += (sender, args) =>
                 {
                     Intent browserIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://github.com/Bionic-Reading-Library/Bionic-Reading-Lib"));
                     browserIntent.SetFlags(ActivityFlags.NewTask);
                     StartActivity(browserIntent);
+                    Finish();
 
                 };
                 issue.Click += (sender, args) =>
@@ -79,167 +98,99 @@ namespace Bionic_Reading_Lib
                     Intent browserIntent = new Intent(Intent.ActionView, Android.Net.Uri.Parse("https://github.com/Bionic-Reading-Library/Bionic-Reading-Lib/issues/new"));
                     browserIntent.SetFlags(ActivityFlags.NewTask);
                     StartActivity(browserIntent);
+                    Finish();
                 };
 
                 //Check For updates
                 update.Click += CheckUpdates_Click;
-            }catch(Exception ex)
+            }
+            catch (Exception)
             {
                 Intent intent = new Intent(this, typeof(Error));
                 StartActivity(intent);
             }
         }
-                private async Task<JObject> GetLatestReleaseAsync()
+        private async Task<JObject> GetLatestReleaseAsync()
         {
             try
             {
                 using (var httpClient = new HttpClient())
                 {
                     var response = await httpClient.GetAsync(ReleasesUrl);
-                    response.EnsureSuccessStatusCode();
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        Console.Write(response.StatusCode);
+                        return null;
+                    }
+                    else
+                    {
+                        response.EnsureSuccessStatusCode();
+                    }
                     var responseContent = await response.Content.ReadAsStringAsync();
                     return JObject.Parse(responseContent);
                 }
             }
-            catch (HttpRequestException ex)
+            catch (Exception)
             {
-                // Handle HTTP request exception
-                return null;
-            }
-            catch (JsonReaderException ex)
-            {
-                // Handle JSON reader exception
+                Intent intent = new Intent(this, typeof(Error));
+                intent.Extras.PutString("error", Failup);
+                StartActivity(intent);
                 return null;
             }
         }
 
         private async void CheckUpdates_Click(object sender, EventArgs e)
         {
-
-            int version = (int)Build.VERSION.SdkInt;
-
-            //Checks What API is the device is (For Compatibility Reasons)
-            if (version >= 33)
+            try
             {
-                //API 33 and above uses ReadMediaImages
-                try
+                var latestRelease = await GetLatestReleaseAsync();
+
+                if (latestRelease != null)
                 {
-                   
-                    if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadMediaImages) == Permission.Granted)
+                    var currentVersion = versioncode;
+                    var latestVersion = latestRelease.Value<string>("tag_name").TrimStart('v');
+                    var releaseNotes = latestRelease.Value<string>("body");
+                    downloadUrl = latestRelease.Value<JArray>("assets")[0].Value<string>("browser_download_url");
+
+
+
+                    if (currentVersion != latestVersion)
                     {
-                        var latestRelease = await GetLatestReleaseAsync();
-
-                        if (latestRelease != null)
-                        {
-                            var currentVersion = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
-                            var latestVersion = latestRelease.Value<string>("tag_name").TrimStart('v');
-                            var releaseNotes = latestRelease.Value<string>("body");
-                            var downloadUrl = latestRelease.Value<JArray>("assets")[0].Value<string>("browser_download_url");
-
-                            if (currentVersion != latestVersion)
-                            {
-                                ShowUpdatePopup(latestVersion, releaseNotes, downloadUrl);
-                            }
-                            else
-                            {
-                                Toast.MakeText(this, "You are using the latest version", ToastLength.Short).Show();
-                            }
-                        }
-                        else
-                        {
-                            Toast.MakeText(this, "Unable to check for updates", ToastLength.Short).Show();
-                        }
+                        ShowUpdatePopup(latestVersion, releaseNotes, downloadUrl);
                     }
                     else
                     {
-                        ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.WriteExternalStorage, Manifest.Permission.ReadExternalStorage, Manifest.Permission.ReadMediaImages }, RequestCodeStoragePermission);
+                        Toast.MakeText(this, "You are using the latest version", ToastLength.Short).Show();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Intent intent = new Intent(this, typeof(Error));
-                    StartActivity(intent);
+                    Toast.MakeText(this, "Unable to check for updates", ToastLength.Short).Show();
                 }
             }
-            else
+            catch (Exception)
             {
-                //API 32 and Below uses WriteExternalStorage
-                try
-                {
-                    //Switch this to Manifest.Permission.WriteExternalStorage for android 12 and below.
-                    if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.ReadExternalStorage) == Permission.Granted)
-                    {
-                        var latestRelease = await GetLatestReleaseAsync();
-
-                        if (latestRelease != null)
-                        {
-                            var currentVersion = PackageManager.GetPackageInfo(PackageName, 0).VersionName;
-                            var latestVersion = latestRelease.Value<string>("tag_name").TrimStart('v');
-                            var releaseNotes = latestRelease.Value<string>("body");
-                            var downloadUrl = latestRelease.Value<JArray>("assets")[0].Value<string>("browser_download_url");
-
-                            if (currentVersion != latestVersion)
-                            {
-                                ShowUpdatePopup(latestVersion, releaseNotes, downloadUrl);
-                            }
-                            else
-                            {
-                                Toast.MakeText(this, "You are using the latest version", ToastLength.Short).Show();
-                            }
-                        }
-                        else
-                        {
-                            Toast.MakeText(this, "Unable to check for updates", ToastLength.Short).Show();
-                        }
-                    }
-                    else
-                    {
-                        ActivityCompat.RequestPermissions(this, new[] { Manifest.Permission.ReadExternalStorage }, RequestCodeStoragePermission);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Intent intent = new Intent(this, typeof(Error));
-                    StartActivity(intent);
-                }
+                Intent intent = new Intent(this, typeof(Error));
+                StartActivity(intent);
             }
-
         }
 
 
         private void ShowUpdatePopup(string latestVersion, string releaseNotes, string downloadUrl)
-                {
-                    var builder = new AlertDialog.Builder(this);
-                    builder.SetTitle("Update Available");
-                    builder.SetMessage($"A new version ({latestVersion}) is available.\n\nRelease Notes:\n{releaseNotes}");
-                    builder.SetPositiveButton("Download", (s, e) =>
-                    {
-                        var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(downloadUrl));
-                        StartActivity(intent);
-                    });
-                    builder.SetNegativeButton("Cancel", (s, e) => { });
-                    var dialog = builder.Create();
-                    dialog.Show();
-                }
-
-                public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-                {
-                    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
-                    if (requestCode == RequestCodeStoragePermission)
-                    {
-                        if (grantResults[0] == Android.Content.PM.Permission.Granted)
-                        {
-                            var checkUpdatesButton = FindViewById<Button>(Resource.Id.appCompatButton2);
-                            checkUpdatesButton.PerformClick();
-                        }
-                        else
-                        {
-                            Toast.MakeText(this, "Cannot check for updates without storage permission", ToastLength.Short).Show();
-                        }
-                    }
-                }
+        {
+            var builder = new AlertDialog.Builder(this);
+            builder.SetTitle("Update Available");
+            builder.SetMessage($"A new version ({latestVersion}) is available.\n\nRelease Notes:\n{releaseNotes}");
+            builder.SetPositiveButton("Download", (s, e) =>
+            {
+                var intent = new Intent(Intent.ActionView, Android.Net.Uri.Parse(downloadUrl));
+                StartActivity(intent);
+            });
+            builder.SetNegativeButton("Cancel", (s, e) => { });
+            var dialog = builder.Create();
+            dialog.Show();
+        }
 
 
     }
-    }
+}

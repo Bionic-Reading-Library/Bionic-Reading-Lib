@@ -16,13 +16,20 @@ namespace Bionic_Reading_Lib
     [Activity(Label = "Error")]
     public class Error : Activity
     {
-        TextView errmsg;
-        TextView egg;
+        private TextView errmsg;
+        private TextView egg;
+        private TextView errms;
+        private string errms_g;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Error);
             var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
+            errms = FindViewById<TextView>(Resource.Id.Errcode);
+            errms.Typeface = urbanistfont;
+            errms_g = Intent.GetStringExtra("error") ?? "Error";
+            string ecode ="Error Code: " + errms_g;
+            errms.Text = ecode;
 
             // Create your application here
             errmsg = FindViewById<TextView>(Resource.Id.Errmsg);
@@ -37,6 +44,7 @@ namespace Bionic_Reading_Lib
             {
                 Intent intent = new Intent(this, typeof(home));
                 StartActivity(intent);
+                Finish();
             };
             egg.Click += (sender, args) => 
             {

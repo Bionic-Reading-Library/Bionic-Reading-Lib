@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark">
+    android:background="@color/dark"
+    android:textAllCaps="False">
 
     <ImageView
         android:layout_width="match_parent"
@@ -27,6 +28,15 @@
         android:textAlignment="center"
         android:textSize="15dp"
         android:textColor="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Errmsg"
+        android:layout_marginTop="20dp"
+        android:id="@+id/Errcode"
+        android:textAlignment="center"
+        android:textSize="15dp"
+        android:textColor="@color/white"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +48,8 @@
         android:layout_marginBottom="5dp"
         android:id="@+id/eagg"
         android:text="@string/easteregg"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textAllCaps="False" />
 
     <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
@@ -48,6 +59,7 @@
             android:background="@drawable/rounded"
             android:layout_above="@id/appCompatButton2"
             android:text="@string/homee"
+            android:textAllCaps="False"
             android:id="@+id/appCompatButton1" />
     <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
@@ -55,6 +67,7 @@
             android:layout_marginHorizontal="45dp"
             android:background="@drawable/rounded"
             android:layout_alignParentBottom="true"
+            android:textAllCaps="False"
             android:layout_marginBottom="40dp"
             android:layout_above="@+id/nht"
             android:text="@string/err"
