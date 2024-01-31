@@ -75,8 +75,9 @@ namespace Bionic_Reading_Lib
                 about = FindViewById<AppCompatButton>(Resource.Id.about);
 
                 //Version Value:
-                string versionName = $"Version: {AppInfo.BuildString}  {AppInfo.VersionString}";
+                string versionName = $"Version: {AppInfo.VersionString}";
                 vercon.Text = versionName;
+                vercon.Typeface = urbanistfont;
 
                 List<string> dataList = new List<string> { "Fantasy", "Horror", "Piece of Life", "Science Fiction" };
                 List<string> sidpanel = new List<string> { "Home", "About", "Report an Issue", "Exit" };

@@ -41,12 +41,14 @@ namespace Bionic_Reading_Lib
         private AndroidX.AppCompat.Widget.AppCompatButton about;
         private FloatingActionButton fab;
         private TextView contentid;
+        private TextView vercon;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.pdfreader);
+                vercon = FindViewById<TextView>(Resource.Id.vercon);
                 urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
                 about = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.about);
                 overlayDrawer = FindViewById<DrawerLayout>(Resource.Id.drawer);
@@ -54,7 +56,9 @@ namespace Bionic_Reading_Lib
                 List<string> sidpanel = new List<string> { "Home", "About", "Report an Issue", "Exit" };
                 adapterpanel = new CustomArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, sidpanel, urbanistfont, textColor);
                 fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-
+                string versionName = $"Version: {AppInfo.VersionString}";
+                vercon.Text = versionName;
+                vercon.Typeface= urbanistfont;
                 tv = FindViewById<TextView>(Resource.Id.Textview);
                 contentid = FindViewById<TextView>(Resource.Id.contentid);
                 pb = FindViewById<ProgressBar>(Resource.Id.pb);

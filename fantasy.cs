@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using Xamarin.Essentials;
 
 namespace Bionic_Reading_Lib
 {
@@ -31,6 +32,9 @@ namespace Bionic_Reading_Lib
         private ArrayAdapter<string> adapterpanel;
         private string selval;
         private AndroidX.AppCompat.Widget.AppCompatButton about;
+        private TextView t1;
+        private TextView t2;
+        private TextView vercon;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
@@ -38,17 +42,21 @@ namespace Bionic_Reading_Lib
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.fantasy);
                 urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
-
+                vercon = FindViewById<TextView>(Resource.Id.vercon);
                 about = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.about);
                 overlayDrawer = FindViewById<DrawerLayout>(Resource.Id.drawer);
                 drawerlist = FindViewById<ListView>(Resource.Id.drawerlist2);
                 List<string> sidpanel = new List<string> { "Home", "About", "Report an Issue", "Exit" };
                 adapterpanel = new CustomArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, sidpanel, urbanistfont, textColor);
-
+                t1 = FindViewById<TextView>(Resource.Id.textView3);
+                t2 = FindViewById<TextView>(Resource.Id.textView2);
+                t1.Typeface = t2.Typeface = urbanistfont;
                 pb = FindViewById<ProgressBar>(Resource.Id.pb);
                 datlist = FindViewById<ListView>(Resource.Id.drawerlist);
                 difficultyLevel = Intent.GetStringExtra("diff") ?? "DefaultDifficulty";
-
+                string versionName = $"Version: {AppInfo.VersionString}";
+                vercon.Text = versionName;
+                vercon.Typeface = urbanistfont;
                 drawerlist.Adapter = adapterpanel;
 
                 drawerlist.ItemClick += (sender, args) =>

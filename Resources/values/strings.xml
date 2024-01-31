@@ -30,4 +30,16 @@
 	<string name="average">The terrain picks up. Your pace quickens as you navigate hills and valleys. Sentences become longer\, like bridges spanning gaps\, vocabulary introduces some less common plants and rocks. You may need to pay closer attention\, but the view continues to be rewarding.</string>
 	<string name="hard">You\'re on a mountain trail\, the air is thin\, and the path is steep. Sentences are like switchbacks\, vocabulary is like boulders and fallen trees. You\'ll need to slow down and watch your step\, but the view from the top will be worth it.</string>
 	<string name="quiz2">Enter your answer</string>
+	<string name="title">Title:</string>
+	<string name="difgen">Difficulty | Genre:</string>
+	<string name="score">Score:</string>
+	<string name="Fantasy">Fantasy</string>
+	<string name="Horror">Horror</string>
+	<string name="Horr">User a genre that elicits fear and suspense through various mediums such as literature\, film\, or art\, captivating audiences with chilling and unsettling experiences.
+	</string>
+	<string name="fantasym">a genre of imaginative fiction that explores worlds and elements beyond the boundaries of reality\, often featuring magic\, mythical creatures\, and epic adventures\.</string>
+	<string name="SCIFI">Science Fiction</string>
+	<string name="scifim">a genre of speculative fiction that explores the impact of imagined innovations in science or technology\, often in a futuristic setting\.</string>
+	<string name="POL">Piece of Life</string>
+	<string name="polm">a genre of fiction that focuses on the everyday lives of ordinary people\, often in a realistic setting\.</string>
 </resources>
