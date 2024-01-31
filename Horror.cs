@@ -33,6 +33,8 @@ namespace Bionic_Reading_Lib
         private AndroidX.AppCompat.Widget.AppCompatButton about;
         private TextView t1;
         private TextView t2;
+        private TextView t3;
+        private TextView t4;
         private TextView vercon;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -51,7 +53,9 @@ namespace Bionic_Reading_Lib
             pb = FindViewById<ProgressBar>(Resource.Id.pb);
             t1 = FindViewById<TextView>(Resource.Id.textView3);
             t2 = FindViewById<TextView>(Resource.Id.textView2);
-            t1.Typeface = t2.Typeface = urbanistfont;
+            t3 = FindViewById<TextView>(Resource.Id.textView4);
+            t4 = FindViewById<TextView>(Resource.Id.textView5);
+            t1.Typeface = t2.Typeface = t3.Typeface = t4.Typeface = urbanistfont;
             datlist = FindViewById<ListView>(Resource.Id.drawerlist);
             difficultyLevel = Intent.GetStringExtra("diff") ?? "DefaultDifficulty";
             drawerlist.Adapter = adapterpanel;

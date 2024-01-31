@@ -40,6 +40,8 @@ namespace Bionic_Reading_Lib
         private DrawerLayout overlayDrawer;
         private ListView drawerlist;
         private TextView vercon;
+        private TextView t2;
+        private TextView t3;
 
 
 
@@ -68,7 +70,9 @@ namespace Bionic_Reading_Lib
                 bdesc = FindViewById<TextView>(Resource.Id.bdesc);
                 bdesc2 = FindViewById<TextView>(Resource.Id.bdesc2);
                 bdesc3 = FindViewById<TextView>(Resource.Id.bdesc3);
-                vercon.Typeface = title.Typeface = bdesc.Typeface = title2.Typeface = title3.Typeface = bdesc2.Typeface = not.Typeface = bdesc3.Typeface = urbanistfont;
+                t2 = FindViewById<TextView>(Resource.Id.textView2);
+                t3 = FindViewById<TextView>(Resource.Id.textView3);
+                t2.Typeface = t3.Typeface = vercon.Typeface = title.Typeface = bdesc.Typeface = title2.Typeface = title3.Typeface = bdesc2.Typeface = not.Typeface = bdesc3.Typeface = urbanistfont;
                 title.SetTypeface(title.Typeface, TypefaceStyle.Bold);
                 title2.SetTypeface(title2.Typeface, TypefaceStyle.Bold);
                 title3.SetTypeface(title3.Typeface, TypefaceStyle.Bold);
@@ -284,7 +288,6 @@ namespace Bionic_Reading_Lib
                 return view;
             }
         }
-
 
     }
 }

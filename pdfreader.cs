@@ -42,6 +42,8 @@ namespace Bionic_Reading_Lib
         private FloatingActionButton fab;
         private TextView contentid;
         private TextView vercon;
+        private TextView t2;
+        private TextView t3;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             try
@@ -56,9 +58,11 @@ namespace Bionic_Reading_Lib
                 List<string> sidpanel = new List<string> { "Home", "About", "Report an Issue", "Exit" };
                 adapterpanel = new CustomArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, sidpanel, urbanistfont, textColor);
                 fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
+                t2 = FindViewById<TextView>(Resource.Id.textView2);
+                t3 = FindViewById<TextView>(Resource.Id.textView3);
                 string versionName = $"Version: {AppInfo.VersionString}";
                 vercon.Text = versionName;
-                vercon.Typeface= urbanistfont;
+                t2.Typeface = t3.Typeface = vercon.Typeface= urbanistfont;
                 tv = FindViewById<TextView>(Resource.Id.Textview);
                 contentid = FindViewById<TextView>(Resource.Id.contentid);
                 pb = FindViewById<ProgressBar>(Resource.Id.pb);
@@ -113,6 +117,7 @@ namespace Bionic_Reading_Lib
                     string[] datap = { pdfurl[0], pdfurl[1], pdfurl[3], pdfurl[4] };
                     intent.PutExtra("datap", datap);
                     StartActivity(intent);
+                    Finish();
                 };
                 _ = DisplayTextFromLinkAsync(pdfurl[2]);
             }

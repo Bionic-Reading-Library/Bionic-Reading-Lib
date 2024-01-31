@@ -44,12 +44,16 @@ namespace Bionic_Reading_Lib
         private TextInputLayout TextInputLayout;
         private RelativeLayout complete;
         private GifImageView gifImageView;
+        private TextView info1;
         private TextView info2;
+        private TextView info3;
         private TextView info4;
+        private TextView info5;
         private TextView info6;
         private TextView status;
+        private TextView t2;
+        private TextView t3;
         private AndroidX.AppCompat.Widget.AppCompatButton rhome;
-        private AndroidX.AppCompat.Widget.AppCompatButton retry;
         private TextView vercon;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -72,17 +76,22 @@ namespace Bionic_Reading_Lib
             debug = FindViewById<TextView>(Resource.Id.debug);
             datap = Intent.GetStringArrayExtra("datap") ?? new string[0];
             gifImageView = FindViewById<GifImageView>(Resource.Id.gifImageView);
+            info1 = FindViewById<TextView>(Resource.Id.info1);
             info2 = FindViewById<TextView>(Resource.Id.info2);
+            info3 = FindViewById<TextView>(Resource.Id.info3);
             info4 = FindViewById<TextView>(Resource.Id.info4);
+            info5 = FindViewById<TextView>(Resource.Id.info5);
             info6 = FindViewById<TextView>(Resource.Id.info6);
             status = FindViewById<TextView>(Resource.Id.status);
             rhome = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.homee);
+            t2 = FindViewById<TextView>(Resource.Id.textView2);
+            t3 = FindViewById<TextView>(Resource.Id.textView3);
             string versionName = $"Version: {AppInfo.VersionString}";
             vercon.Text = versionName;
             vercon.Typeface = urbanistfont;
             debug.Text = $"{datap[0]} | {datap[1]} | {datap[2]} | {datap[3]}";
             inop.Typeface = urbanistfont;
-            info4.Typeface = info6.Typeface = info2.Typeface = Title.Typeface = DiGen.Typeface = scoreView.Typeface = inop.Typeface = debug.Typeface = urbanistfont;
+            t2.Typeface = t3.Typeface = rhome.Typeface = info5.Typeface = info3.Typeface = info1.Typeface = status.Typeface = info4.Typeface = info6.Typeface = info2.Typeface = Title.Typeface = DiGen.Typeface = scoreView.Typeface = inop.Typeface = debug.Typeface = urbanistfont;
             Title.Text= datap[2].Replace(".txt", "");
             DiGen.Text = $"{datap[0]} | {datap[1]}";
 
@@ -178,6 +187,7 @@ namespace Bionic_Reading_Lib
             {
                 Stream input;
                 int half = questions.Count / 2;
+                scoreView.Text = $"{score} / {questions.Count}";
                 if (currentQuestionIndex < questions.Count)
                 {
                     debug.Text = questions[currentQuestionIndex].Question;
@@ -198,6 +208,7 @@ namespace Bionic_Reading_Lib
                         info2.Text = datap[2].Replace(".txt", "");
                         info4.Text = $"{datap[0]} | {datap[1]}";
                         info6.Text = $"{score} / {questions.Count}";
+                        OnBackPressed();
                     }
                     else if(score <= half)
                     {
@@ -209,6 +220,7 @@ namespace Bionic_Reading_Lib
                         info2.Text = datap[2].Replace(".txt", "");
                         info4.Text = $"{datap[0]} | {datap[1]}";
                         info6.Text = $"{score} / {questions.Count}";
+                        OnBackPressed();
                     }
 
                     rhome.Click += (sender, args) =>
@@ -227,12 +239,14 @@ namespace Bionic_Reading_Lib
                     {
                         if (string.Equals(input, questions[currentQuestionIndex].Answer, StringComparison.OrdinalIgnoreCase))
                         {
+                            scoreView.Text = $"{score} / {questions.Count}";
                             currentQuestionIndex++;
                             score++;
                             DCData();
                         }
                         else
                         {
+                            scoreView.Text = $"{score} / {questions.Count}";
                             currentQuestionIndex++;
                             DCData();
                         }
@@ -248,6 +262,7 @@ namespace Bionic_Reading_Lib
             }
 
         }
+
         private byte[] ConvertByteArray(Stream input)
         {
             byte[] buffer = new byte[16 * 1024];
@@ -284,6 +299,27 @@ namespace Bionic_Reading_Lib
                 }
 
                 return view;
+            }
+        }
+        public override void OnBackPressed()
+        {
+            if(score == questions.Count)
+            {
+                rhome.Click += (sender, args) =>
+                {
+                    Intent intent = new Intent(this, typeof(home));
+                    StartActivity(intent);
+                    Finish();
+                };
+            }
+            else
+            {
+                rhome.Click += (sender, args) =>
+                {
+                    Intent intent = new Intent(this, typeof(home));
+                    StartActivity(intent);
+                    Finish();
+                };
             }
         }
     }

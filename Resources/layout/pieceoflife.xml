@@ -64,20 +64,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="@string/POL"
+                    android:text="@string/Fantasy"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:id="@+id/textView2"/>
+                    android:id="@+id/textView4"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_below="@+id/textView2"
-                    android:text="@string/polm"
+                    android:layout_below="@+id/textView4"
+                    android:text="@string/fantasym"
                     android:textColor="@color/white"
                     android:textSize="10dp"
                     android:paddingEnd="20dp"
-                    android:id="@+id/textView3"/>
+                    android:id="@+id/textView5"/>
             </RelativeLayout>
         </RelativeLayout>
 
