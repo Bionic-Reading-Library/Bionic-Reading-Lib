@@ -75,8 +75,9 @@
         android:src="@drawable/quiz"
         android:layout_margin="40dp"
         android:backgroundTint="@color/orange"
-        app:maxImageSize = "50dp"
+        app:maxImageSize = "56dp"
         android:scaleType="fitCenter"
+        android:outlineAmbientShadowColor="#ff000000" 
     />
     <include
         android:id="@+id/drawer"
@@ -85,5 +86,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 </RelativeLayout>

@@ -16,6 +16,8 @@ using Felipecsl.GifImageViewLibrary;
 using System.Threading;
 using System.IO;
 using Xamarin.Essentials;
+using System.ComponentModel.Design;
+using System.Threading.Tasks;
 
 namespace Bionic_Reading_Lib
 {
@@ -36,7 +38,7 @@ namespace Bionic_Reading_Lib
         private TextView debug;
         private TextInputEditText inop;
         private FloatingActionButton fab;
-        private int currentQuestionIndex;
+        private int currentQuestionIndex = 0;
         private int score = 0;
         private TextView scoreView;
         private TextView Title;
@@ -55,6 +57,9 @@ namespace Bionic_Reading_Lib
         private TextView t3;
         private AndroidX.AppCompat.Widget.AppCompatButton rhome;
         private TextView vercon;
+        private Stream input;
+        private int cq;
+        private int clickcount = 0 ;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -146,6 +151,7 @@ namespace Bionic_Reading_Lib
         {
             public string Question { get; set; }
             public string Answer { get; set; }
+            public string ql { get; set; }
         }
 
         private class GitHubContent
@@ -168,8 +174,7 @@ namespace Bionic_Reading_Lib
 
                     string data = await httpclient.GetStringAsync(gitHubContents.download_url);
                     questions = JsonConvert.DeserializeObject<List<QAP>>(data);
-                    currentQuestionIndex = 0;
-                    DCData(); //Display and Compare Data
+                    DcData(); //Display and Compare Data
 
                 }
                 catch (Exception ex)
@@ -181,87 +186,85 @@ namespace Bionic_Reading_Lib
             }
         }
 
-        private void DCData()
+        private async void DcData()
         {
             try
             {
-                Stream input;
-                int half = questions.Count / 2;
                 scoreView.Text = $"{score} / {questions.Count}";
-                if (currentQuestionIndex < questions.Count)
+
+                cq = Convert.ToInt32(questions[currentQuestionIndex].ql);
+
+                if (currentQuestionIndex == cq)
                 {
                     debug.Text = questions[currentQuestionIndex].Question;
-                }
-                else
-                {
-                    TextInputLayout.Visibility = ViewStates.Gone;
-                    inop.Visibility = ViewStates.Gone;
-                    fab.Visibility = ViewStates.Gone;
-                    complete.Visibility = ViewStates.Visible;
-                    if (score == questions.Count)
-                    {
-                        input = Resources.OpenRawResource(Resource.Drawable.complete);
-                        byte[] bytes = ConvertByteArray(input);
-                        gifImageView.SetBytes(bytes);
-                        gifImageView.StartAnimation();
-                        status.Text = "Congrats, You Answered all the questions perfectly!";
-                        info2.Text = datap[2].Replace(".txt", "");
-                        info4.Text = $"{datap[0]} | {datap[1]}";
-                        info6.Text = $"{score} / {questions.Count}";
-                        OnBackPressed();
-                    }
-                    else if(score <= half)
-                    {
-                        input = Resources.OpenRawResource(Resource.Drawable.Failed);
-                        byte[] bytes = ConvertByteArray(input);
-                        gifImageView.SetBytes(bytes);
-                        gifImageView.StartAnimation();
-                        status.Text = "Looks like you failed, Better luck next time!";
-                        info2.Text = datap[2].Replace(".txt", "");
-                        info4.Text = $"{datap[0]} | {datap[1]}";
-                        info6.Text = $"{score} / {questions.Count}";
-                        OnBackPressed();
-                    }
+                    inop.Text = string.Empty;
 
-                    rhome.Click += (sender, args) =>
-                    {
-                        Intent intent = new Intent(this, typeof(home));
-                        StartActivity(intent);
-                        Finish();
-                    };
+                    // Subscribe to the Click event outside the loop to avoid multiple subscriptions
+                    fab.Click -= FabClickHandler;
+                    fab.Click += FabClickHandler;
+                    await Task.Delay(100); // Introduce a small delay to allow the UI to update
 
                 }
-
-                fab.Click += (sender, args) =>
-                {
-                    string input = inop.Text.Trim();
-                    if (currentQuestionIndex < questions.Count)
-                    {
-                        if (string.Equals(input, questions[currentQuestionIndex].Answer, StringComparison.OrdinalIgnoreCase))
-                        {
-                            scoreView.Text = $"{score} / {questions.Count}";
-                            currentQuestionIndex++;
-                            score++;
-                            DCData();
-                        }
-                        else
-                        {
-                            scoreView.Text = $"{score} / {questions.Count}";
-                            currentQuestionIndex++;
-                            DCData();
-                        }
-                    }
-                };
             }
             catch (Exception ex)
             {
                 Intent intent = new Intent(this, typeof(Error));
                 intent.PutExtra("error", ex.Message);
                 StartActivity(intent);
-                Finish();
             }
-
         }
+
+        private void FabClickHandler(object sender, EventArgs e)
+        {
+            string inputText = inop.Text.Trim();
+            cq = Convert.ToInt32(questions[currentQuestionIndex].ql);
+            if (string.Equals(inputText, questions[currentQuestionIndex].Answer, StringComparison.OrdinalIgnoreCase))
+            {
+                // Correct answer
+                score++;
+                scorestat();
+            }
+            else { scorestat(); }
+
+
+            if (currentQuestionIndex < 4)
+            {
+                currentQuestionIndex++;
+            }
+            DcData();
+        }
+        private void display()
+        {
+            TextInputLayout.Visibility = ViewStates.Gone;
+            inop.Visibility = ViewStates.Gone;
+            fab.Visibility = ViewStates.Gone;
+            complete.Visibility = ViewStates.Visible;
+        }
+        private void scorestat()
+        {
+            try
+            {
+                if (currentQuestionIndex == 4)
+                {   
+                    display();
+                    input = Resources.OpenRawResource(Resource.Drawable.complete);
+                    byte[] bytes = ConvertByteArray(input);
+                    gifImageView.SetBytes(bytes);
+                    gifImageView.StartAnimation();
+                    status.Text = "Congrats, You Finished the Quiz!";
+                    info2.Text = datap[2].Replace(".txt", "");
+                    info4.Text = $"{datap[0]} | {datap[1]}";
+                    info6.Text = $"{score} / {questions.Count}";
+                    OnBackPressed();
+                }
+            }catch(Exception ex)
+            {
+                Intent intent = new Intent(this, typeof(Error));
+                intent.PutExtra("error", ex.Message);
+                StartActivity(intent);
+            }
+        }
+
 
         private byte[] ConvertByteArray(Stream input)
         {

@@ -132,7 +132,7 @@
         android:src="@drawable/next"
         android:layout_margin="40dp"
         android:backgroundTint="@color/orange"
-        app:maxImageSize = "50dp"
+        app:maxImageSize = "56dp"
         android:scaleType="fitCenter"/>
     <include
         android:id="@+id/drawer"
