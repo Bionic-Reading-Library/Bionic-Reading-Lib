@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#1B3147</color>
     <color name="colorAccent">#3498db</color>
 	<color name="dark">#272727</color>
-	<color name="orange">#FFEFD0</color>
+	<color name="orange">#e04c31</color>
 	<color name="greenish">#35C2C1</color>
 	<color name="white">#FFFFFF</color>
 	<color name="semiwhite">#A7A7A7</color>
@@ -12,4 +12,20 @@
 	<color name="pgsdark">#393939</color>
 	<color name="easterg">#7c7c7c</color>
 	<color name="green">#183D3D</color>
+	<color name="cw">#FFFDD0</color>
+	<color name="grayish">#ededed</color>
+	<color name="gra">#adadad</color>
+
+
+
+	<!--New Set Of Colors for the app-->
+	<color name="PrimaryColor">#FFEFD0</color>
+	<color name="PrimaryDarkColor">#E5E3B5</color>
+	<color name="Buttoncl">#FFD464</color>
+	<color name="topbar">#FFC979</color>
+	<color name="TextColor">#272727</color>
+	<color name="ItemColor1">#4F688C</color>
+	<color name="ItemColor2">#C05939</color>
+	<color name="ItemColor3">#D32C2C</color>
+	<color name="darktext">#CCCAA7</color>
 </resources>

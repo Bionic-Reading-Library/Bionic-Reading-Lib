@@ -30,7 +30,7 @@ namespace Bionic_Reading_Lib
     {
         private const string ReleasesUrl = "https://api.github.com/repos/Bionic-Reading-Library/BRL-Release/releases/latest";
         private string versioncode = $"{AppInfo.VersionString}";
-        private string CodeName = "Stable - Brittle Byte";
+        private string CodeName = "Stable - Night Byte";
         private string Failup = "Network Returned 404 - Error Checking for Updates.";
         private string downloadUrl = "";
         private Typeface urbanistfont;

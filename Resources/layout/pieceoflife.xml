@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark">
+    android:background="@color/PrimaryColor">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brl"
+        android:background="@color/topbar"
         android:padding="20dp"
         android:id="@+id/nav">
         <androidx.appcompat.widget.AppCompatButton
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rel2"
-            android:background="@color/dark"
+            android:background="@color/PrimaryColor"
             android:id="@+id/cont">
             <ProgressBar
                 android:id="@+id/pb"

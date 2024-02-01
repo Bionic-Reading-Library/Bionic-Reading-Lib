@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Graphics;
 using Android.Hardware;
 using Android.OS;
+using Android.Text;
 using Android.Util;
 using Android.Views;
 using Android.Webkit;
@@ -30,7 +31,7 @@ namespace Bionic_Reading_Lib
     public class pdfreader : Activity
     {
         private Typeface urbanistfont;
-        private Color textColor = Color.White;
+        private Color textColor = Color.ParseColor("#272727");
         private string[] pdfurl;
         private TextView tv;
         private ProgressBar pb;
@@ -62,12 +63,12 @@ namespace Bionic_Reading_Lib
                 t3 = FindViewById<TextView>(Resource.Id.textView3);
                 string versionName = $"Version: {AppInfo.VersionString}";
                 vercon.Text = versionName;
-                t2.Typeface = t3.Typeface = vercon.Typeface= urbanistfont;
+                t2.Typeface = t3.Typeface = vercon.Typeface = urbanistfont;
                 tv = FindViewById<TextView>(Resource.Id.Textview);
                 contentid = FindViewById<TextView>(Resource.Id.contentid);
                 pb = FindViewById<ProgressBar>(Resource.Id.pb);
 
-                pdfurl = Intent.GetStringArrayExtra("data");           
+                pdfurl = Intent.GetStringArrayExtra("data");
                 contentid.Text = $"{pdfurl[0]} | {pdfurl[1]} | {pdfurl[3]}";
                 contentid.Typeface = urbanistfont;
                 drawerlist.Adapter = adapterpanel;
@@ -166,16 +167,39 @@ namespace Bionic_Reading_Lib
                 using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
                 using (var stream = await response.Content.ReadAsStreamAsync())
                 using (var reader = new StreamReader(stream, Encoding.UTF8))
-                {
 
+                {
+                    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "4283c6345emsh55b840ecff7586ap1fcdccjsn90cc6fd34d55");
+                    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "bionic-reading1.p.rapidapi.com");
+                    string feed = "";
+                    string apin = "https://bionic-reading1.p.rapidapi.com/convert";
                     string chunk;
                     while ((chunk = await reader.ReadLineAsync()) != null)
                     {
-                        tv.Text += chunk + "\n";
+
+                        feed += chunk + "\n";
+                    }
+
+                    var content = new Dictionary<string, string>
+                    {
+                        { "content", feed }, // Replace 'tv.Text' with the content you want to send
+                        { "response_type", "html" },
+                        { "request_type", "html" },
+                        { "fixation", "1" },
+                        { "saccade", "10" },
+                    };
+                    using (var code = await client.PostAsync(apin, new FormUrlEncodedContent(content)))
+                    {
+                        code.EnsureSuccessStatusCode();
+                        var responseBody = await code.Content.ReadAsStringAsync();
+                        var formattedText = Html.FromHtml(responseBody, FromHtmlOptions.ModeLegacy);
+                        // Parse and display the content
+                        tv.SetText(formattedText, TextView.BufferType.Spannable);
                         tv.Typeface = urbanistfont;
                         pb.Visibility = ViewStates.Gone;
                     }
                 }
+
             }
             catch (Exception ex)
             {

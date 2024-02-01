@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
         android:id="@+id/nav"
-        android:background="@color/brl">
+        android:background="@color/PrimaryColor">
         <ImageView
                 android:layout_below="@+id/relativeLayout1"
                 android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:layout_height="match_parent"
             android:id="@+id/navi"
             android:layout_below="@id/rel2"
-            android:background="@color/brl">
+            android:background="@color/PrimaryColor">
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

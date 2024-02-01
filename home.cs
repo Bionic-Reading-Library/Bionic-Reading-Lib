@@ -35,7 +35,7 @@ namespace Bionic_Reading_Lib
         private AppCompatButton about;
         private ArrayAdapter<string> adapter;
         private ArrayAdapter<string> adapterpanel;
-        private Color textColor = Color.White; // Change this to your desired text color
+        private Color textColor = Color.ParseColor("#272727");// Change this to your desired text color
         private string selval;
         private DrawerLayout overlayDrawer;
         private ListView drawerlist;
@@ -52,7 +52,6 @@ namespace Bionic_Reading_Lib
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.home);
                 var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
-
                 // Create your application here
                 easy = FindViewById<RelativeLayout>(Resource.Id.Container);
                 avg = FindViewById<RelativeLayout>(Resource.Id.Container2);

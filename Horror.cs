@@ -23,7 +23,7 @@ namespace Bionic_Reading_Lib
         private ListView datlist;
         private string difficultyLevel;
         private List<GitHubContent> gitHubContents;
-        private Color textColor = Color.White;
+        private Color textColor = Color.ParseColor("#272727");
         private Typeface urbanistfont;
         private ProgressBar pb;
         private DrawerLayout overlayDrawer;

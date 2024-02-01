@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark">
+    android:background="@color/PrimaryColor">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brl"
+        android:background="@color/topbar"
         android:padding="20dp"
         android:id="@+id/nav">
         <androidx.appcompat.widget.AppCompatButton
@@ -34,7 +34,7 @@
         android:id="@+id/Information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded2"
+        android:background="@drawable/qcolor"
         android:layout_below="@+id/nav"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:textColor="@color/white"
+            android:textColor="@color/TextColor"
             android:id="@+id/Title"
             android:text="Title"
             android:textSize="15dp"/>
@@ -59,14 +59,14 @@
             android:layout_below="@+id/Title"
             android:text="Difficulty | Genre"
             android:textSize="15dp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:layout_toRightOf="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Score"
             android:text="0/10"
-            android:textColor="@color/white"
+            android:textColor="@color/TextColor"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:textAlignment="textEnd"/>
@@ -86,14 +86,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Container"
-                android:background="@drawable/rounded2"
+                android:background="@drawable/qcolor"
                 android:padding="20dp"
                 android:layout_marginBottom="20dp"
                 >
                 <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/TextColor"
                 android:id="@+id/debug"
                 android:text="Test Information"
                 android:textSize="15dp"/>
@@ -107,19 +107,18 @@
                 android:hint="@string/quiz2"
                 android:textAlignment="textStart"
                 android:textColorHint="@color/semiwhite"
-                android:background="@drawable/rounded2"
-                android:visibility="visible"
-                tools:visibility="visible">
+                android:background="@drawable/qcolor"
+                android:visibility="visible">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inop"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textAlignment="textStart"
+                    android:background="@drawable/qcolor"
                     android:textColor="@color/white"
-                    android:visibility="visible"
-                    tools:ignore="TextContrastCheck"
-                    tools:visibility="visible" />
+                    android:visibility="invisible"
+                    tools:ignore="TextContrastCheck" />
             </com.google.android.material.textfield.TextInputLayout>
         </RelativeLayout>
     </ScrollView>

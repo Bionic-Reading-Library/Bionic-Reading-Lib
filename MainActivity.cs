@@ -59,6 +59,9 @@ namespace Bionic_Reading_Lib
             AppCompatButton start = FindViewById<AppCompatButton>(Resource.Id.appCompatButton1);
             AppCompatButton exit = FindViewById<AppCompatButton>(Resource.Id.appCompatButton2);
             start.Typeface = exit.Typeface = urbanistfont;
+            start.SetTypeface(start.Typeface, TypefaceStyle.Bold);
+            exit.SetTypeface(exit.Typeface, TypefaceStyle.Bold);
+            help.SetTypeface(help.Typeface, TypefaceStyle.Bold);
 
 
             exit.Click += (sender, args) =>

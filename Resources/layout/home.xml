@@ -5,12 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark">
+    android:background="@color/cw">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brl"
+        android:background="@color/topbar"
         android:padding="20dp"
         android:id="@+id/nav">
         <androidx.appcompat.widget.AppCompatButton
@@ -153,7 +153,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginHorizontal="10dp"
             android:id="@+id/COntainer4"
-            android:background="@drawable/rounded"
+            android:background="@drawable/notif"
             android:padding="4dp">
 
             <TextView
@@ -162,7 +162,7 @@
                 android:text="Tip: Press each level to show the genre"
                 android:textAlignment="center"
                 android:textSize="10dp"
-                android:textColor="@color/pgsdark"
+                android:textColor="@color/TextColor"
                 android:id="@+id/not"
                 />
 

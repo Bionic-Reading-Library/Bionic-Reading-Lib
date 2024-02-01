@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark"
+    android:background="@color/PrimaryColor"
     android:padding="45dp">
     <com.felipecsl.gifimageview.library.GifImageView
         android:id="@+id/gifImageView"
@@ -21,13 +21,13 @@
         android:layout_marginBottom="50dp"
         android:textAlignment="center"
         android:text="Status"
-        android:textColor="@color/white"/>
+        android:textColor="@color/TextColor"/>
 
     <RelativeLayout
         android:id="@+id/scoredat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded2"
+        android:background="@drawable/qcolor"
         android:padding="15dp"
         android:layout_above="@+id/homee"
         android:layout_marginBottom="100dp">
@@ -39,7 +39,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:text="@string/title"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:id="@+id/info2"
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:text="Test Information"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:id="@+id/info3"
             android:layout_below="@id/info1"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="@string/difgen"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:id="@+id/info4"
             android:layout_below="@id/info2"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="Test Information"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:id="@+id/info5"
             android:layout_below="@id/info4"
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="@string/score"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
         <TextView
             android:id="@+id/info6"
             android:layout_below="@id/info4"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:text="Test Information"
-            android:textColor="@color/white"/>
+            android:textColor="@color/TextColor"/>
 
     </RelativeLayout>
     <androidx.appcompat.widget.AppCompatButton

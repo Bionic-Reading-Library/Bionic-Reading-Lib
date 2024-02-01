@@ -28,7 +28,7 @@ namespace Bionic_Reading_Lib
         private string apiresponse;
         private List<QAP> questions;
         private Typeface urbanistfont;
-        private Color textColor = Color.White;
+        private Color textColor = Color.ParseColor("#272727");
         private DrawerLayout overlayDrawer;
         private ListView drawerlist;
         private ArrayAdapter<string> adapterpanel;
@@ -99,6 +99,12 @@ namespace Bionic_Reading_Lib
             t2.Typeface = t3.Typeface = rhome.Typeface = info5.Typeface = info3.Typeface = info1.Typeface = status.Typeface = info4.Typeface = info6.Typeface = info2.Typeface = Title.Typeface = DiGen.Typeface = scoreView.Typeface = inop.Typeface = debug.Typeface = urbanistfont;
             Title.Text= datap[2].Replace(".txt", "");
             DiGen.Text = $"{datap[0]} | {datap[1]}";
+            info1.SetTypeface(info1.Typeface, TypefaceStyle.Bold);
+            info2.SetTypeface(info2.Typeface, TypefaceStyle.Bold);
+            info3.SetTypeface(info3.Typeface, TypefaceStyle.Bold);
+            info4.SetTypeface(info4.Typeface, TypefaceStyle.Bold);
+            info5.SetTypeface(info5.Typeface, TypefaceStyle.Bold);
+            info6.SetTypeface(info6.Typeface, TypefaceStyle.Bold);
 
 
             //Code for Side panel
@@ -252,6 +258,11 @@ namespace Bionic_Reading_Lib
                     gifImageView.SetBytes(bytes);
                     gifImageView.StartAnimation();
                     status.Text = "Congrats, You Finished the Quiz!";
+                    status.SetTypeface(status.Typeface, TypefaceStyle.Bold);
+                    info1.SetTypeface(info1.Typeface, TypefaceStyle.Bold);
+                    info2.SetTypeface(info2.Typeface, TypefaceStyle.Bold);
+                    info3.SetTypeface(info3.Typeface, TypefaceStyle.Bold);
+                    rhome.SetTypeface(rhome.Typeface, TypefaceStyle.Bold);
                     info2.Text = datap[2].Replace(".txt", "");
                     info4.Text = $"{datap[0]} | {datap[1]}";
                     info6.Text = $"{score} / {questions.Count}";
