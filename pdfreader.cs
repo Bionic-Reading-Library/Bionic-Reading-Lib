@@ -6,8 +6,10 @@ using Android.Graphics;
 using Android.Hardware;
 using Android.OS;
 using Android.Text;
+using Android.Text.Style;
 using Android.Util;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Webkit;
 using Android.Widget;
 using AndroidX.Core.App;
@@ -51,6 +53,8 @@ namespace Bionic_Reading_Lib
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.pdfreader);
+                var ltr = AnimationUtils.LoadAnimation(this, Resource.Animation.ltr_transition);
+                var rtl = AnimationUtils.LoadAnimation(this, Resource.Animation.rtl_transition);
                 vercon = FindViewById<TextView>(Resource.Id.vercon);
                 urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
                 about = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.about);
@@ -104,10 +108,12 @@ namespace Bionic_Reading_Lib
                 {
                     if (overlayDrawer.Visibility == ViewStates.Visible)
                     {
+                        overlayDrawer.StartAnimation(rtl);
                         overlayDrawer.Visibility = ViewStates.Gone;
                     }
                     else
                     {
+                        overlayDrawer.StartAnimation(ltr);
                         overlayDrawer.Visibility = ViewStates.Visible;
                     }
 
@@ -159,55 +165,56 @@ namespace Bionic_Reading_Lib
         }
 
         async Task DisplayTextFromLinkAsync(string url)
-        {
-            pb.Visibility = ViewStates.Visible;
-            try
-            {
-                using (var client = new HttpClient())
-                using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
-                using (var stream = await response.Content.ReadAsStreamAsync())
-                using (var reader = new StreamReader(stream, Encoding.UTF8))
+         {
+             pb.Visibility = ViewStates.Visible;
+             try
+             {
+                 using (var client = new HttpClient())
+                 using (var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead))
+                 using (var stream = await response.Content.ReadAsStreamAsync())
+                 using (var reader = new StreamReader(stream, Encoding.UTF8))
 
-                {
-                    client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "4283c6345emsh55b840ecff7586ap1fcdccjsn90cc6fd34d55");
-                    client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "bionic-reading1.p.rapidapi.com");
-                    string feed = "";
-                    string apin = "https://bionic-reading1.p.rapidapi.com/convert";
-                    string chunk;
-                    while ((chunk = await reader.ReadLineAsync()) != null)
-                    {
+                 {
+                     client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "4283c6345emsh55b840ecff7586ap1fcdccjsn90cc6fd34d55");
+                     client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "bionic-reading1.p.rapidapi.com");
+                     string feed = "";
+                     string apin = "https://bionic-reading1.p.rapidapi.com/convert";
+                     string chunk;
+                     while ((chunk = await reader.ReadLineAsync()) != null)
+                     {
 
-                        feed += chunk + "\n";
-                    }
+                         feed += chunk + "\n";
+                     }
 
-                    var content = new Dictionary<string, string>
-                    {
-                        { "content", feed }, // Replace 'tv.Text' with the content you want to send
-                        { "response_type", "html" },
-                        { "request_type", "html" },
-                        { "fixation", "1" },
-                        { "saccade", "10" },
-                    };
-                    using (var code = await client.PostAsync(apin, new FormUrlEncodedContent(content)))
-                    {
-                        code.EnsureSuccessStatusCode();
-                        var responseBody = await code.Content.ReadAsStringAsync();
-                        var formattedText = Html.FromHtml(responseBody, FromHtmlOptions.ModeLegacy);
+                     var content = new Dictionary<string, string>
+                     {
+                         { "content", feed }, // Replace 'tv.Text' with the content you want to send
+                         { "response_type", "html" },
+                         { "request_type", "html" },
+                         { "fixation", "1" },
+                         { "saccade", "10" },
+                     };
+                     using (var code = await client.PostAsync(apin, new FormUrlEncodedContent(content)))
+                     {
+                         code.EnsureSuccessStatusCode();
+                         var responseBody = await code.Content.ReadAsStringAsync();
+                         var formattedText = Html.FromHtml(responseBody, FromHtmlOptions.ModeLegacy);
                         // Parse and display the content
                         tv.SetText(formattedText, TextView.BufferType.Spannable);
+                        //tv.LetterSpacing = 0.1f;
+                        tv.SetLineSpacing(1.2f, 1.2f);
                         tv.Typeface = urbanistfont;
                         pb.Visibility = ViewStates.Gone;
-                    }
-                }
+                     }
+                 }
 
-            }
-            catch (Exception ex)
-            {
-                // Handle errors gracefully
-                Toast.MakeText(this, "Error fetching text: " + ex.Message, ToastLength.Long).Show();
-            }
-        }
-
+             }
+             catch (Exception ex)
+             {
+                 // Handle errors gracefully
+                 Toast.MakeText(this, "Error fetching text: " + ex.Message, ToastLength.Long).Show();
+             }
+}
 
     }
 }

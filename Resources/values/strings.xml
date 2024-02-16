@@ -4,7 +4,7 @@
 	<string name="start">Start</string>
 	<string name="exit">Exit</string>
 	<string name="nh">Need Help?</string>
-	<string name="wel">Welcome to\nBionic Reading Library</string>
+	<string name="wel">Welcome to Bionic Reading Library</string>
 	<string name="desc">Enhance your reading ability with advanced technology for an immersive and efficient reading experience.</string>
 	<string name="end">Oops, it looks like you\'ve reached the end. More modules are coming soon.</string>
 	<string name="checkrel">Check For Updates</string>
@@ -42,4 +42,7 @@
 	<string name="scifim">a genre of speculative fiction that explores the impact of imagined innovations in science or technology\, often in a futuristic setting\.</string>
 	<string name="POL">Piece of Life</string>
 	<string name="polm">a genre of fiction that focuses on the everyday lives of ordinary people\, often in a realistic setting\.</string>
+	<string name="test">Lorem ipsum dolor sit amet nulla tempor eirmod. Diam in eos nonumy invidunt. Sit dolore esse diam nonumy gubergren amet duis et nostrud dolor nisl et nulla ipsum diam et tempor ipsum. Magna sadipscing at nonumy et eos rebum aliquip tempor labore erat et lorem hendrerit kasd vel et sed eirmod. Eirmod gubergren dolor invidunt nostrud sit et nibh ipsum eos sed ut. Sed aliquyam ipsum takimata labore ipsum dolores ipsum aliquyam clita aliquyam et. Ut placerat sed sed justo velit adipiscing duo voluptua accusam dolor nonumy te duo sit justo ea. Sadipscing sadipscing gubergren diam at hendrerit tempor consequat hendrerit et sit no ad. Sit ut dolores lorem dolor in erat. Clita dolor labore no sanctus duo eos sit et labore autem ea stet at dolores et erat sanctus. Nisl dolore nostrud. Dolores eos est tempor no justo vel accusam gubergren erat elitr eos sea. Duo est invidunt elitr sea est sit adipiscing ea quis sed. Elitr et elitr ea kasd justo in blandit ut suscipit dolores magna zzril et ea erat. Ut accusam dolor nonummy stet gubergren aliquam est aliquyam vero et praesent. Dignissim nostrud sadipscing sed vero duo aliquyam at duo et ex diam sit dolore. Nonumy diam elitr feugait iusto amet volutpat nulla voluptua lobortis facilisis nostrud facer stet dolore. Labore invidunt kasd amet. Facilisi eos ullamcorper magna lorem clita duo duis.</string>
+	<string name="appmsg"><b>Disc</b>over <b>a </b> \n<b>Bet</b>ter <b>Rea</b>ding \n<b>Experi</b>ence.</string>
+	<string name="vbuild">Stable - NeuroLIT</string>
 </resources>

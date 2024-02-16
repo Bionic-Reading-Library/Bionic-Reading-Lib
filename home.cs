@@ -1,9 +1,11 @@
-﻿using Android.App;
+﻿using Android.Animation;
+using Android.App;
 using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.DrawerLayout.Widget;
@@ -42,6 +44,9 @@ namespace Bionic_Reading_Lib
         private TextView vercon;
         private TextView t2;
         private TextView t3;
+        private bool isExpandedEasy = false;
+        private bool isExpandedAvg = false;
+        private bool isExpandedHard = false;
 
 
 
@@ -52,6 +57,10 @@ namespace Bionic_Reading_Lib
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.home);
                 var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
+                var ltr = AnimationUtils.LoadAnimation(this, Resource.Animation.ltr_transition);
+                var rtl = AnimationUtils.LoadAnimation(this, Resource.Animation.rtl_transition);
+                var up = AnimationUtils.LoadAnimation(this, Resource.Animation.up_transition);
+                var down = AnimationUtils.LoadAnimation(this, Resource.Animation.down_transition);
                 // Create your application here
                 easy = FindViewById<RelativeLayout>(Resource.Id.Container);
                 avg = FindViewById<RelativeLayout>(Resource.Id.Container2);
@@ -127,33 +136,41 @@ namespace Bionic_Reading_Lib
                 {
                     if (overlayDrawer.Visibility == ViewStates.Visible)
                     {
+                        overlayDrawer.StartAnimation(rtl);
                         overlayDrawer.Visibility = ViewStates.Gone;
                     }
                     else
                     {
+                        overlayDrawer.StartAnimation(ltr);
                         overlayDrawer.Visibility = ViewStates.Visible;
                     }
 
                 };
                 easy.Click += (sender, args) =>
                 {
+                    
                     if (liste.Visibility == Android.Views.ViewStates.Visible)
                     {
+                        
                         liste.Visibility = Android.Views.ViewStates.Gone;
                     }
                     else
                     {
+                        
                         liste.Visibility = Android.Views.ViewStates.Visible;
                     }
                 };
                 avg.Click += (sender, args) =>
                 {
+                    
                     if (lista.Visibility == Android.Views.ViewStates.Visible)
                     {
+                        
                         lista.Visibility = Android.Views.ViewStates.Gone;
                     }
                     else
                     {
+                        
                         lista.Visibility = Android.Views.ViewStates.Visible;
                     }
                 };
@@ -161,10 +178,12 @@ namespace Bionic_Reading_Lib
                 {
                     if (listh.Visibility == Android.Views.ViewStates.Visible)
                     {
+                        
                         listh.Visibility = Android.Views.ViewStates.Gone;
                     }
                     else
                     {
+                        
                         listh.Visibility = Android.Views.ViewStates.Visible;
                     }
                 };
@@ -262,6 +281,7 @@ namespace Bionic_Reading_Lib
             }
 
             }
+
         public class CustomArrayAdapter : ArrayAdapter<string>
         {
             private readonly Typeface typeface;

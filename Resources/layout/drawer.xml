@@ -8,6 +8,10 @@
     android:id="@+id/drawerLayout1">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="50dp"
         android:id="@+id/nav"

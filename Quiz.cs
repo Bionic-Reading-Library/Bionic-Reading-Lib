@@ -18,6 +18,8 @@ using System.IO;
 using Xamarin.Essentials;
 using System.ComponentModel.Design;
 using System.Threading.Tasks;
+using System.Linq;
+using Android.Views.Animations;
 
 namespace Bionic_Reading_Lib
 {
@@ -36,14 +38,12 @@ namespace Bionic_Reading_Lib
         private AndroidX.AppCompat.Widget.AppCompatButton about;
         private string[] datap;
         private TextView debug;
-        private TextInputEditText inop;
         private FloatingActionButton fab;
         private int currentQuestionIndex = 0;
         private int score = 0;
         private TextView scoreView;
         private TextView Title;
         private TextView DiGen;
-        private TextInputLayout TextInputLayout;
         private RelativeLayout complete;
         private GifImageView gifImageView;
         private TextView info1;
@@ -60,13 +60,21 @@ namespace Bionic_Reading_Lib
         private Stream input;
         private int cq;
         private int clickcount = 0 ;
+        private RadioButton r1;
+        private RadioButton r2;
+        private RadioButton r3;
+        private RadioButton r4;
+        private RelativeLayout rbcontainer;
+        private int aoq = 0;
+        private RadioButton selectedRadioButton = null;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Quiz);
+            var ltr = AnimationUtils.LoadAnimation(this, Resource.Animation.ltr_transition);
+            var rtl = AnimationUtils.LoadAnimation(this, Resource.Animation.rtl_transition);
             urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
             complete = FindViewById<RelativeLayout>(Resource.Id.complete);
-            TextInputLayout = FindViewById<TextInputLayout>(Resource.Id.textInputLayout);
             vercon = FindViewById<TextView>(Resource.Id.vercon);
             Title = FindViewById<TextView>(Resource.Id.Title);
             DiGen = FindViewById<TextView>(Resource.Id.difficulty);
@@ -76,8 +84,8 @@ namespace Bionic_Reading_Lib
             overlayDrawer = FindViewById<DrawerLayout>(Resource.Id.drawer);
             drawerlist = FindViewById<ListView>(Resource.Id.drawerlist2);
             List<string> sidpanel = new List<string> { "Home", "About", "Report an Issue", "Exit" };
-            inop = FindViewById<TextInputEditText>(Resource.Id.inop);
             adapterpanel = new CustomArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, sidpanel, urbanistfont, textColor);
+            rbcontainer = FindViewById<RelativeLayout>(Resource.Id.Container2);
             debug = FindViewById<TextView>(Resource.Id.debug);
             datap = Intent.GetStringArrayExtra("datap") ?? new string[0];
             gifImageView = FindViewById<GifImageView>(Resource.Id.gifImageView);
@@ -91,12 +99,15 @@ namespace Bionic_Reading_Lib
             rhome = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.homee);
             t2 = FindViewById<TextView>(Resource.Id.textView2);
             t3 = FindViewById<TextView>(Resource.Id.textView3);
+            r1 = FindViewById<RadioButton>(Resource.Id.rb1);
+            r2 = FindViewById<RadioButton>(Resource.Id.rb2);
+            r3 = FindViewById<RadioButton>(Resource.Id.rb3);
+            r4 = FindViewById<RadioButton>(Resource.Id.rb4);
             string versionName = $"Version: {AppInfo.VersionString}";
             vercon.Text = versionName;
             vercon.Typeface = urbanistfont;
             debug.Text = $"{datap[0]} | {datap[1]} | {datap[2]} | {datap[3]}";
-            inop.Typeface = urbanistfont;
-            t2.Typeface = t3.Typeface = rhome.Typeface = info5.Typeface = info3.Typeface = info1.Typeface = status.Typeface = info4.Typeface = info6.Typeface = info2.Typeface = Title.Typeface = DiGen.Typeface = scoreView.Typeface = inop.Typeface = debug.Typeface = urbanistfont;
+            r1.Typeface = r2.Typeface = r3.Typeface = r4.Typeface = t2.Typeface = t3.Typeface = rhome.Typeface = info5.Typeface = info3.Typeface = info1.Typeface = status.Typeface = info4.Typeface = info6.Typeface = info2.Typeface = Title.Typeface = DiGen.Typeface = scoreView.Typeface = debug.Typeface = urbanistfont;
             Title.Text= datap[2].Replace(".txt", "");
             DiGen.Text = $"{datap[0]} | {datap[1]}";
             info1.SetTypeface(info1.Typeface, TypefaceStyle.Bold);
@@ -113,10 +124,12 @@ namespace Bionic_Reading_Lib
             {
                 if (overlayDrawer.Visibility == ViewStates.Visible)
                 {
+                    overlayDrawer.StartAnimation(rtl);
                     overlayDrawer.Visibility = ViewStates.Gone;
                 }
                 else
                 {
+                    overlayDrawer.StartAnimation(ltr);
                     overlayDrawer.Visibility = ViewStates.Visible;
                 }
 
@@ -156,8 +169,10 @@ namespace Bionic_Reading_Lib
         private class QAP
         {
             public string Question { get; set; }
+            public string[] Choices { get; set; } // Choices are separated by a comma ,
             public string Answer { get; set; }
             public string ql { get; set; }
+            public string aoq { get; set; }
         }
 
         private class GitHubContent
@@ -180,6 +195,7 @@ namespace Bionic_Reading_Lib
 
                     string data = await httpclient.GetStringAsync(gitHubContents.download_url);
                     questions = JsonConvert.DeserializeObject<List<QAP>>(data);
+
                     DcData(); //Display and Compare Data
 
                 }
@@ -196,6 +212,13 @@ namespace Bionic_Reading_Lib
         {
             try
             {
+                if (selectedRadioButton != null)
+                {
+                    selectedRadioButton.Checked = false;
+                    selectedRadioButton = null;
+                }
+
+                aoq = Convert.ToInt32(questions[0].aoq);
                 scoreView.Text = $"{score} / {questions.Count}";
 
                 cq = Convert.ToInt32(questions[currentQuestionIndex].ql);
@@ -203,13 +226,17 @@ namespace Bionic_Reading_Lib
                 if (currentQuestionIndex == cq)
                 {
                     debug.Text = questions[currentQuestionIndex].Question;
-                    inop.Text = string.Empty;
+                    string[] choices = questions[currentQuestionIndex].Choices;
+                    UpdateRadioButtonsText(choices); // Update radio button text
+                                                     // Attach click listeners to radio buttons
+                    r1.Click += RadioButtonClicked;
+                    r2.Click += RadioButtonClicked;
+                    r3.Click += RadioButtonClicked;
+                    r4.Click += RadioButtonClicked;
 
-                    // Subscribe to the Click event outside the loop to avoid multiple subscriptions
                     fab.Click -= FabClickHandler;
                     fab.Click += FabClickHandler;
-                    await Task.Delay(100); // Introduce a small delay to allow the UI to update
-
+                    await Task.Delay(100);
                 }
             }
             catch (Exception ex)
@@ -220,29 +247,67 @@ namespace Bionic_Reading_Lib
             }
         }
 
+        private void UpdateRadioButtonsText(string[] options)
+        {
+            r1.Text = options[0];
+            r2.Text = options[1];
+            r3.Text = options[2];
+            r4.Text = options[3];
+        }
+
+        private void RadioButtonClicked(object sender, EventArgs e)
+        {
+            RadioButton clickedRadioButton = (RadioButton)sender;
+
+            // Clear selection state of all radio buttons
+            ClearRadioButtonSelection();
+
+            // Update selection state of the clicked radio button
+            clickedRadioButton.Checked = true;
+            selectedRadioButton = clickedRadioButton;
+        }
+
+
+        private void ClearRadioButtonSelection()
+        {
+            r1.Checked = false;
+            r2.Checked = false;
+            r3.Checked = false;
+            r4.Checked = false;
+        }
+
+
+
+
         private void FabClickHandler(object sender, EventArgs e)
         {
-            string inputText = inop.Text.Trim();
-            cq = Convert.ToInt32(questions[currentQuestionIndex].ql);
-            if (string.Equals(inputText, questions[currentQuestionIndex].Answer, StringComparison.OrdinalIgnoreCase))
+            try
             {
-                // Correct answer
-                score++;
-                scorestat();
-            }
-            else { scorestat(); }
+                cq = Convert.ToInt32(questions[currentQuestionIndex].ql);
+                if (r1.Checked == true && r1.Text == questions[currentQuestionIndex].Answer || r2.Checked == true && r2.Text == questions[currentQuestionIndex].Answer || r3.Checked == true && r3.Text == questions[currentQuestionIndex].Answer || r4.Checked == true && r4.Text == questions[currentQuestionIndex].Answer)
+                {
+                    // Correct answer
+                    score++;
+                    scorestat();
+                }
+                else { scorestat(); }
 
 
-            if (currentQuestionIndex < 4)
+                if (currentQuestionIndex < aoq)
+                {
+                    currentQuestionIndex++;
+                }
+                DcData();
+            }catch(Exception ex)
             {
-                currentQuestionIndex++;
+                Intent intent = new Intent(this, typeof(Error));
+                intent.PutExtra("error", ex.Message);
+                StartActivity(intent);
             }
-            DcData();
         }
         private void display()
         {
-            TextInputLayout.Visibility = ViewStates.Gone;
-            inop.Visibility = ViewStates.Gone;
+            rbcontainer.Visibility = ViewStates.Gone;
             fab.Visibility = ViewStates.Gone;
             complete.Visibility = ViewStates.Visible;
         }
@@ -250,7 +315,7 @@ namespace Bionic_Reading_Lib
         {
             try
             {
-                if (currentQuestionIndex == 4)
+                if (currentQuestionIndex == aoq)
                 {   
                     display();
                     input = Resources.OpenRawResource(Resource.Drawable.complete);
@@ -288,7 +353,6 @@ namespace Bionic_Reading_Lib
                 return ms.ToArray();
             }
         }
-
         public class CustomArrayAdapter<T> : ArrayAdapter<T>
         {
             private readonly Typeface typeface;

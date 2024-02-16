@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/topbar"
+        android:background="@drawable/shadowonly"
         android:id="@+id/relativeLayout1" 
         android:padding="15dp">
             <androidx.appcompat.widget.AppCompatButton
@@ -164,7 +164,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="25dp"
-            android:background="@drawable/rounded"
+            android:background="@drawable/btn"
+            android:textColor="@color/TextColorlight"
             android:text="@string/checkrel"    
             android:textAllCaps="false" />
         <androidx.appcompat.widget.AppCompatButton
@@ -176,7 +177,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded"
+            android:background="@drawable/btn2"
             android:text="@string/git"
             android:layout_below="@+id/appCompatButton1"
             android:textAllCaps="false" />
@@ -188,7 +189,7 @@
             android:layout_marginRight="25dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded"
+            android:background="@drawable/btn2"
             android:text="@string/err"
             android:layout_toRightOf="@id/appCompatButton2"
             android:layout_alignParentEnd="true"

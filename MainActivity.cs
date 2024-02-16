@@ -18,6 +18,8 @@ using System.Threading.Tasks;
 using System;
 using System.Security.Cryptography;
 using System.Linq;
+using Android.Text;
+using Android.Text.Style;
 
 namespace Bionic_Reading_Lib
 {
@@ -27,6 +29,7 @@ namespace Bionic_Reading_Lib
 
         private const string ReleasesUrl = "https://api.github.com/repos/Bionic-Reading-Library/BRL-Release/releases/latest";
         private string versioncode = $"{AppInfo.VersionString}";
+        private string versionbuid = "";
         private string Failup = "Network Returned 404 - Error Checking for Updates.";
         private string downloadUrl = "nice";
         TextView header;
@@ -35,6 +38,7 @@ namespace Bionic_Reading_Lib
         TextView udate;
         TextView dl;
         TextView verp;
+        TextView verbuild;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -43,19 +47,32 @@ namespace Bionic_Reading_Lib
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
+            int appColor = ContextCompat.GetColor(this, Resource.Color.TextColor);
+            Window.SetStatusBarColor(new Color(appColor));
             var urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
-
+            versionbuid = GetString(Resource.String.vbuild);
             header = FindViewById<TextView>(Resource.Id.textView1);
+            verbuild = FindViewById<TextView>(Resource.Id.versionbuild);
             desc = FindViewById<TextView>(Resource.Id.textView2);
             help = FindViewById<TextView>(Resource.Id.nht);
             udate = FindViewById<TextView>(Resource.Id.update);
             dl = FindViewById<TextView>(Resource.Id.dl);
             verp = FindViewById<TextView>(Resource.Id.verp);
-            header.Typeface = desc.Typeface = help.Typeface = udate.Typeface = dl.Typeface = verp.Typeface = urbanistfont;
-            header.SetTypeface(header.Typeface, TypefaceStyle.Bold);
+            verbuild.Typeface = header.Typeface = desc.Typeface = help.Typeface = udate.Typeface = dl.Typeface = verp.Typeface = urbanistfont;
             udate.SetTypeface(udate.Typeface, TypefaceStyle.Bold);
+            var appmsg = "Discover a Better Reading Experience."; 
 
+            // Create a SpannableString
+            SpannableString spannableString = new SpannableString(appmsg);
+
+            // Apply bold styling to specific parts of the text
+            spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), 0, 4, SpanTypes.ExclusiveExclusive); //Disc
+            spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), 9, 10, SpanTypes.ExclusiveExclusive); //a
+            spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), 11, 14, SpanTypes.ExclusiveExclusive); // "Bet"
+            spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), 18, 22, SpanTypes.ExclusiveExclusive); // "Rea"
+            spannableString.SetSpan(new StyleSpan(TypefaceStyle.Bold), 26, 32, SpanTypes.ExclusiveExclusive); // "Experi"
+            header.SetText(spannableString, TextView.BufferType.Spannable);
+            verbuild.Text = "// " + versionbuid;
             AppCompatButton start = FindViewById<AppCompatButton>(Resource.Id.appCompatButton1);
             AppCompatButton exit = FindViewById<AppCompatButton>(Resource.Id.appCompatButton2);
             start.Typeface = exit.Typeface = urbanistfont;

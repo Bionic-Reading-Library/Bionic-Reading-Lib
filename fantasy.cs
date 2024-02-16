@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using Xamarin.Essentials;
+using Android.Views.Animations;
 
 namespace Bionic_Reading_Lib
 {
@@ -43,6 +44,8 @@ namespace Bionic_Reading_Lib
             {
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.fantasy);
+                var ltr = AnimationUtils.LoadAnimation(this, Resource.Animation.ltr_transition);
+                var rtl = AnimationUtils.LoadAnimation(this, Resource.Animation.rtl_transition);
                 urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
                 vercon = FindViewById<TextView>(Resource.Id.vercon);
                 about = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.about);
@@ -94,10 +97,12 @@ namespace Bionic_Reading_Lib
                 {
                     if (overlayDrawer.Visibility == ViewStates.Visible)
                     {
+                        overlayDrawer.StartAnimation(rtl);
                         overlayDrawer.Visibility = ViewStates.Gone;
                     }
                     else
                     {
+                        overlayDrawer.StartAnimation(ltr);
                         overlayDrawer.Visibility = ViewStates.Visible;
                     }
 

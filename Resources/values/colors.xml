@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2c3e50</color>
-    <color name="colorPrimaryDark">#1B3147</color>
-    <color name="colorAccent">#3498db</color>
+    <color name="colorPrimary">#272727</color>
+    <color name="colorPrimaryDark">#FEF3CC</color>
+    <color name="colorAccent">#272727</color>
 	<color name="dark">#272727</color>
 	<color name="orange">#e04c31</color>
 	<color name="greenish">#35C2C1</color>
@@ -12,20 +12,23 @@
 	<color name="pgsdark">#393939</color>
 	<color name="easterg">#7c7c7c</color>
 	<color name="green">#183D3D</color>
-	<color name="cw">#FFFDD0</color>
+	<color name="cw">#FCFBF4</color>
 	<color name="grayish">#ededed</color>
 	<color name="gra">#adadad</color>
 
 
 
 	<!--New Set Of Colors for the app-->
-	<color name="PrimaryColor">#FFEFD0</color>
-	<color name="PrimaryDarkColor">#E5E3B5</color>
+	<color name="darkv2">#2b2b2b</color>
+	<color name="PrimaryColor">#FFF1D7</color>
+	<color name="PrimaryDarkColor">#F3EBD7</color>
 	<color name="Buttoncl">#FFD464</color>
-	<color name="topbar">#FFC979</color>
-	<color name="TextColor">#272727</color>
+	<color name="topbar">#FEF3CC</color>
+	<color name="TextColor">#2b2b2b</color>
+	<color name="TextColorlight">#FAFAFA</color>
 	<color name="ItemColor1">#4F688C</color>
 	<color name="ItemColor2">#C05939</color>
 	<color name="ItemColor3">#D32C2C</color>
 	<color name="darktext">#CCCAA7</color>
+	<color name="transp">#000000a8</color>
 </resources>

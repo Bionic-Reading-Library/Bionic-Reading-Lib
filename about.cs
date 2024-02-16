@@ -30,7 +30,7 @@ namespace Bionic_Reading_Lib
     {
         private const string ReleasesUrl = "https://api.github.com/repos/Bionic-Reading-Library/BRL-Release/releases/latest";
         private string versioncode = $"{AppInfo.VersionString}";
-        private string CodeName = "Stable - Night Byte";
+        private string CodeName = "";
         private string Failup = "Network Returned 404 - Error Checking for Updates.";
         private string downloadUrl = "";
         private Typeface urbanistfont;
@@ -53,7 +53,7 @@ namespace Bionic_Reading_Lib
                 base.OnCreate(savedInstanceState);
                 SetContentView(Resource.Layout.about);
                 urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
-
+                CodeName = GetString(Resource.String.vbuild);
 
                 // Create your application here
                 header = FindViewById<TextView>(Resource.Id.textView1);

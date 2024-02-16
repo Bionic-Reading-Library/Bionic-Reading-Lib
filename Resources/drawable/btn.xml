@@ -2,17 +2,17 @@
 	<!-- Shadow -->
 	<item>
 		<shape>
-			<corners  android:radius="10dp"/>
+			<corners android:radius="10dp" />
 			<solid android:color="#20000000" />
 			<!-- Adjust alpha for darkness -->
 		</shape>
 	</item>
 
 	<!-- Main Shape -->
-	<item android:bottom="-3dp">
+	<item android:bottom="3dp">
 		<shape>
-			<corners  android:radius="10dp"/>
-			<solid android:color="@color/PrimaryDarkColor" />
+			<corners android:radius="10dp" />
+			<solid android:color="@color/darkv2" />
 		</shape>
 	</item>
 </layer-list>

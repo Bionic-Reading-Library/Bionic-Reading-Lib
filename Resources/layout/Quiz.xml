@@ -10,13 +10,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/topbar"
+        android:background="@drawable/shadowonly"
         android:padding="20dp"
         android:id="@+id/nav">
         <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="27dp"
+            android:layout_height="18dp"
             android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:gravity="center"
             android:background="@drawable/menu"
             android:id="@+id/about"
@@ -34,7 +35,7 @@
         android:id="@+id/Information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/qcolor"
+        android:background="@drawable/qcolor2"
         android:layout_below="@+id/nav"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="20dp"
@@ -91,35 +92,48 @@
                 android:layout_marginBottom="20dp"
                 >
                 <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/TextColor"
-                android:id="@+id/debug"
-                android:text="Test Information"
-                android:textSize="15dp"/>
-            </RelativeLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                android:layout_below="@+id/Container"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/quiz2"
-                android:textAlignment="textStart"
-                android:textColorHint="@color/semiwhite"
-                android:background="@drawable/qcolor"
-                android:visibility="visible">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inop"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAlignment="textStart"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/TextColor"
+                    android:id="@+id/debug"
+                    android:text="Test Information"
+                    android:textSize="15dp"/>
+            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Container"
+                    android:id="@+id/Container2"
                     android:background="@drawable/qcolor"
-                    android:textColor="@color/white"
-                    android:visibility="invisible"
-                    tools:ignore="TextContrastCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:padding="20dp"
+                    android:layout_marginBottom="20dp">
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/TextColor"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/rb1"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/TextColor"
+                        android:id="@+id/rb2"
+                        android:layout_below="@+id/rb1"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/TextColor"
+                        android:id="@+id/rb3"
+                        android:layout_below="@+id/rb2"/>
+                    <RadioButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/TextColor"
+                        android:id="@+id/rb4"
+                        android:layout_below="@+id/rb3"/>
+                </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
     <com.google.android.material.floatingactionbutton.FloatingActionButton

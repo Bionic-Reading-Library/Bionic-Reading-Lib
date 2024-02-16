@@ -4,6 +4,7 @@ using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using AndroidX.DrawerLayout.Widget;
 using Newtonsoft.Json;
@@ -40,6 +41,8 @@ namespace Bionic_Reading_Lib
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Horror);
+            var ltr = AnimationUtils.LoadAnimation(this, Resource.Animation.ltr_transition);
+            var rtl = AnimationUtils.LoadAnimation(this, Resource.Animation.rtl_transition);
             vercon = FindViewById<TextView>(Resource.Id.vercon);
             urbanistfont = Typeface.CreateFromAsset(Assets, "fonts/UrbanistNonItalic.ttf");
             about = FindViewById<AndroidX.AppCompat.Widget.AppCompatButton>(Resource.Id.about);
@@ -91,10 +94,12 @@ namespace Bionic_Reading_Lib
             {
                 if (overlayDrawer.Visibility == ViewStates.Visible)
                 {
+                    overlayDrawer.StartAnimation(rtl);
                     overlayDrawer.Visibility = ViewStates.Gone;
                 }
                 else
                 {
+                    overlayDrawer.StartAnimation(ltr);
                     overlayDrawer.Visibility = ViewStates.Visible;
                 }
 
